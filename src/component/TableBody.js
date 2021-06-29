@@ -12,6 +12,19 @@ const ELEMENTS = {
 // holder for all constructors
 // TODO: Separate into some component/index.js
 
+function renderingFunctor(type) {
+  switch (type) {
+    case "archive":
+      return (item, index) => (
+        <ArchiveNote item={item} key={index}></ArchiveNote>
+      );
+    case "summary":
+      return (item, index) => <SummaryRow item={item} key={index}></SummaryRow>;
+    default:
+      return (item, index) => <ActiveNote item={item} key={index}></ActiveNote>;
+  }
+} // Could be DRYied
+
 export function TableBody(props) {
   const type = props.type;
 
@@ -19,11 +32,9 @@ export function TableBody(props) {
 
   const collection = useSelector(selector);
 
-  const elementConstructor = ELEMENTS[type];
+  const renderingFunction = renderingFunctor(type);
 
-  const renderedNotes = collection.map((item, index) =>
-    elementConstructor({ item, key: index })
-  );
+  const renderedRows = collection.map(renderingFunction);
 
-  return <div>{renderedNotes}</div>;
+  return <div>{renderedRows}</div>;
 }
