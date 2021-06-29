@@ -1,56 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import {Table} from "./layout/table";
+import {notesPattern, summaryPattern} from "./layout/tablePatterns";
+import ButtonAdd from "./ui/ButtonAdd.js";
+
+
+const uiAdd = <ButtonAdd ></ButtonAdd>;
+const summary = <div>Summary</div>
+
+const tables = [
+  {
+    id: "table-container",
+    type: "notes",
+    heading: "My Notes",
+    pattern: notesPattern,
+    children: [uiAdd]
+  },
+  {
+    id: "archive-container",
+    type: "archive",
+    heading: "My Archive",
+    pattern: notesPattern,
+  },
+  {
+    id: "summary-container",
+    type: "summary",
+    heading: "My Summary",
+    pattern: summaryPattern,
+    children: [summary]
+  }
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div>
+      {
+        tables.map((item, index) => {
+          return <Table key={index} id={item.id} heading={item.heading} pattern={item.pattern} type={item.type}>{item.children}</Table>
+        })
+      }
     </div>
   );
 }
