@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { noteEdited } from "../redux/store";
-import { parseDates, tmstmpToString } from "../utils/utils.js";
+import { parseDates } from "../utils/utils.js";
 
 export const EditNoteForm = (props) => {
   const note = props.note;

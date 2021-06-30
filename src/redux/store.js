@@ -48,9 +48,7 @@ export const { archiveAdded, archiveDeleted } = archiveSlice.actions;
 const summarySlice = createSlice({
   name: "summary",
   initialState: initialSummary || [],
-  reducers: {
-    summaryUpdated(state, action) {},
-  },
+  reducers: {},
 });
 
 const store = configureStore({

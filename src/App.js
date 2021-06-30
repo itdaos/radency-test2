@@ -4,7 +4,7 @@ import {notesPattern, summaryPattern} from "./layout/tablePatterns";
 import ButtonAdd from "./ui/ButtonAdd.js";
 
 
-const uiAdd = <ButtonAdd ></ButtonAdd>;
+const uiAdd = <ButtonAdd key={"add-btn"} ></ButtonAdd>;
 
 const tables = [
   {

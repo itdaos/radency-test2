@@ -2,14 +2,13 @@ import { EditNoteForm } from "../ui/EditNoteForm.js";
 import NoteControls from "../ui/NoteControls.js";
 import { getCategoryName, getImgName } from "../utils/utils.js";
 import React from "react";
+import { useSelector } from "react-redux";
 
 class ActiveNote extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { isBeingEdited: false };
-    this.note = props.item;
-
+    this.state = { isBeingEdited: false, note: props.item };
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleEditFinish = this.handleEditFinish.bind(this);
   }
@@ -19,11 +18,12 @@ class ActiveNote extends React.Component {
   }
 
   handleEditFinish(e) {
-    this.setState({ isBeingEdited: false });
+    this.setState({ isBeingEdited: false, note: this.props.item });
   }
 
   render() {
-    if (!this.isBeingEdited) {
+    this.note = this.props.item;
+    if (!this.state.isBeingEdited) {
       return (
         <div className="row item">
           <div className="col-2 name">

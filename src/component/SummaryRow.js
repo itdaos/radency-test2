@@ -15,10 +15,10 @@ function SummaryRow(props) {
 
   return (
     <div className="row item">
-      <div class="col-1"></div>
-      <div class="col-2">{getCategoryName(category)}</div>
-      <div class="col-4">{summary.active}</div>
-      <div class="col-4">{summary.archive}</div>
+      <div className="col-1"></div>
+      <div className="col-2">{getCategoryName(category)}</div>
+      <div className="col-4">{summary.active}</div>
+      <div className="col-4">{summary.archive}</div>
     </div>
   );
 }
