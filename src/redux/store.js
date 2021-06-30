@@ -3,7 +3,7 @@ import { initialNotes, initialArchive } from "./init.js";
 
 const notesSlice = createSlice({
   name: "notes",
-  initialState: initialNotes.map((item) => ({ id: nanoid(), ...item })) || null,
+  initialState: initialNotes.map((item) => ({ id: nanoid(), ...item })) || [],
   reducers: {
     noteAdded(state, action) {
       state.push(action.payload);
@@ -20,14 +20,18 @@ const notesSlice = createSlice({
         existingNote.createdAt = editedNote.createdAt;
       }
     },
+    noteDeleted(state, action) {
+      const { id } = action.payload;
+      return state.filter((note) => note.id !== id);
+    },
   },
 });
 
-export const { noteAdded, noteEdited } = notesSlice.actions;
+export const { noteAdded, noteEdited, noteDeleted } = notesSlice.actions;
 
 const archiveSlice = createSlice({
   name: "archive",
-  initialState: initialArchive,
+  initialState: initialArchive.map((note) => ({ id: nanoid(), ...note })) || [],
   reducers: {},
 });
 

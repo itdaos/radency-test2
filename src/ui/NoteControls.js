@@ -1,22 +1,26 @@
 import React from "react";
+import store, { noteDeleted } from "../redux/store";
 
 class NoteControls extends React.Component {
   constructor(props) {
     super(props);
-
-    this.id = this.props.note.id;
 
     this.handleArchive = this.handleArchive.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.props.onEditClick;
   }
 
-  handleArchive() {
+  handleArchive(e) {
     console.log("Archive ", this.id);
   }
 
-  handleDelete() {
-    console.log("Delete ", this.id);
+  handleDelete(e) {
+    const id = this.props.note.id;
+    store.dispatch(
+      noteDeleted({
+        id,
+      })
+    );
   }
 
   render() {

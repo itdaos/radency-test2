@@ -1,27 +1,36 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { noteDeleted } from "../redux/store.js";
 import ActiveNote from "./ActiveNote.js";
 import ArchiveNote from "./ArchiveNote.js";
 import SummaryRow from "./SummaryRow.js";
 
-const ELEMENTS = {
-  notes: ActiveNote,
-  archive: ArchiveNote,
-  summary: SummaryRow,
-};
+// const ELEMENTS = {
+//   notes: ActiveNote,
+//   archive: ArchiveNote,
+//   summary: SummaryRow,
+// };
 // holder for all constructors
 // TODO: Separate into some component/index.js
 
-function renderingFunctor(type) {
+function renderingFunctor(type, handlers = []) {
   switch (type) {
     case "archive":
       return (item, index) => (
-        <ArchiveNote item={item} key={index}></ArchiveNote>
+        <ArchiveNote
+          handlers={handlers}
+          item={item}
+          key={item.id}
+        ></ArchiveNote>
       );
     case "summary":
-      return (item, index) => <SummaryRow item={item} key={index}></SummaryRow>;
+      return (item, index) => (
+        <SummaryRow handlers={handlers} item={item} key={index}></SummaryRow>
+      );
     default:
-      return (item, index) => <ActiveNote item={item} key={index}></ActiveNote>;
+      return (item, index) => (
+        <ActiveNote handlers={handlers} item={item} key={item.id}></ActiveNote>
+      );
   }
 } // Could be DRYied
 

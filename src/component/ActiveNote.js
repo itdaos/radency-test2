@@ -1,7 +1,7 @@
 import { EditNoteForm } from "../ui/EditNoteForm.js";
 import NoteControls from "../ui/NoteControls.js";
 import { getCategoryName, getImgName } from "../utils/utils.js";
-import React, { useState } from "react";
+import React from "react";
 
 class ActiveNote extends React.Component {
   constructor(props) {
