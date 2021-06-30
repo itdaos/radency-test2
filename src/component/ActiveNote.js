@@ -9,6 +9,9 @@ class ActiveNote extends React.Component {
 
     this.state = { isBeingEdited: false };
     this.note = props.item;
+
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleEditFinish = this.handleEditFinish.bind(this);
   }
 
   handleEditClick(e) {

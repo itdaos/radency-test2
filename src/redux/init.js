@@ -67,3 +67,21 @@ export const initialArchive = [
     dates: ["01/04/2016"],
   },
 ];
+
+export const initialSummary = [
+  {
+    category: "task",
+    active: 0,
+    archived: 0,
+  },
+  {
+    category: "idea",
+    active: 0,
+    archived: 0,
+  },
+  {
+    category: "random",
+    active: 0,
+    archived: 0,
+  },
+];

@@ -1,13 +1,31 @@
 import React from "react";
-import store, { noteDeleted, noteArchived, archiveAdded } from "../redux/store";
+import store, {
+  noteAdded,
+  noteDeleted,
+  archiveDeleted,
+  archiveAdded,
+} from "../redux/store";
 
 class NoteControls extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleArchive = this.handleArchive.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.inArchive = props.inArchive || false;
+
+    this.archiveHandler = this.inArchive
+      ? this.handleUnarchive.bind(this)
+      : this.handleArchive.bind(this);
+    this.deleteHandler = this.inArchive
+      ? this.handleDeleteFromArchive.bind(this)
+      : this.handleDelete.bind(this);
     this.handleEdit = this.props.onEditClick;
+  }
+
+  handleUnarchive(e) {
+    const id = this.props.note.id;
+    const note = { ...this.props.note };
+    store.dispatch(archiveDeleted({ id }));
+    store.dispatch(noteAdded({ ...note }));
   }
 
   handleArchive(e) {
@@ -30,12 +48,23 @@ class NoteControls extends React.Component {
     );
   }
 
+  handleDeleteFromArchive(e) {
+    const id = this.props.note.id;
+    store.dispatch(
+      archiveDeleted({
+        id,
+      })
+    );
+  }
+
   render() {
     return (
       <div className="col-2 controls">
-        <img src="img/edit.svg" alt="edit" onClick={this.handleEdit} />
-        <img src="img/doc.svg" alt="archive" onClick={this.handleArchive} />
-        <img src="img/delete.svg" alt="delete" onClick={this.handleDelete} />
+        {this.inArchive || (
+          <img src="img/edit.svg" alt="edit" onClick={this.handleEdit} />
+        )}
+        <img src="img/doc.svg" alt="archive" onClick={this.archiveHandler} />
+        <img src="img/delete.svg" alt="delete" onClick={this.deleteHandler} />
       </div>
     );
   }

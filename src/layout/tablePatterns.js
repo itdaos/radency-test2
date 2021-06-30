@@ -33,6 +33,11 @@ export const notesPattern = [
 
 export const summaryPattern = [
   {
+    cellName: "",
+    cellData: "",
+    cellSize: 1,
+  },
+  {
     cellName: "Category",
     cellData: "category",
     cellSize: 2,

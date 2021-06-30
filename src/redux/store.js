@@ -1,5 +1,5 @@
 import { configureStore, createSlice, nanoid } from "@reduxjs/toolkit";
-import { initialNotes, initialArchive } from "./init.js";
+import { initialNotes, initialArchive, initialSummary } from "./init.js";
 
 const notesSlice = createSlice({
   name: "notes",
@@ -24,17 +24,10 @@ const notesSlice = createSlice({
       const { id } = action.payload;
       return state.filter((note) => note.id !== id);
     },
-    noteArchived(state, action) {
-      const { id } = action.payload;
-      const note = state.find((note) => note.id === id);
-      store.dispatch(archiveAdded({ note }));
-      return state.filter((note) => note.id !== id);
-    },
   },
 });
 
-export const { noteAdded, noteEdited, noteDeleted, noteArchived } =
-  notesSlice.actions;
+export const { noteAdded, noteEdited, noteDeleted } = notesSlice.actions;
 
 const archiveSlice = createSlice({
   name: "archive",
@@ -43,15 +36,21 @@ const archiveSlice = createSlice({
     archiveAdded(state, action) {
       state.push(action.payload);
     },
+    archiveDeleted(state, action) {
+      const { id } = action.payload;
+      return state.filter((archived) => archived.id !== id);
+    },
   },
 });
 
-export const { archiveAdded } = archiveSlice.actions;
+export const { archiveAdded, archiveDeleted } = archiveSlice.actions;
 
 const summarySlice = createSlice({
   name: "summary",
-  initialState: [],
-  reducers: {},
+  initialState: initialSummary || [],
+  reducers: {
+    summaryUpdated(state, action) {},
+  },
 });
 
 const store = configureStore({

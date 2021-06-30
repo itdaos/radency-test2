@@ -5,7 +5,6 @@ import ButtonAdd from "./ui/ButtonAdd.js";
 
 
 const uiAdd = <ButtonAdd ></ButtonAdd>;
-const summary = <div>Summary</div>
 
 const tables = [
   {
@@ -26,7 +25,6 @@ const tables = [
     type: "summary",
     heading: "My Summary",
     pattern: summaryPattern,
-    children: [summary]
   }
 ]
 

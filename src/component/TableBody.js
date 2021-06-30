@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { noteDeleted } from "../redux/store.js";
+import { useSelector } from "react-redux";
 import ActiveNote from "./ActiveNote.js";
 import ArchiveNote from "./ArchiveNote.js";
 import SummaryRow from "./SummaryRow.js";
@@ -17,19 +16,15 @@ function renderingFunctor(type, handlers = []) {
   switch (type) {
     case "archive":
       return (item, index) => (
-        <ArchiveNote
-          handlers={handlers}
-          item={item}
-          key={item.id}
-        ></ArchiveNote>
+        <ArchiveNote item={item} key={item.id}></ArchiveNote>
       );
     case "summary":
       return (item, index) => (
-        <SummaryRow handlers={handlers} item={item} key={index}></SummaryRow>
+        <SummaryRow category={item.category} key={index}></SummaryRow>
       );
     default:
       return (item, index) => (
-        <ActiveNote handlers={handlers} item={item} key={item.id}></ActiveNote>
+        <ActiveNote item={item} key={item.id}></ActiveNote>
       );
   }
 } // Could be DRYied

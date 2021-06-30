@@ -1,3 +1,4 @@
+import NoteControls from "../ui/NoteControls.js";
 import { getCategoryName, getImgName } from "../utils/utils.js";
 
 function ArchiveNote(props) {
@@ -16,11 +17,7 @@ function ArchiveNote(props) {
           return prev + " " + cur;
         }, "")}
       </div>
-
-      <div className="col-2 controls">
-        <img src="img/doc.svg" alt="archive" />
-        <img src="img/delete.svg" alt="delete" />
-      </div>
+      <NoteControls note={note} inArchive={true}></NoteControls>
     </div>
   );
 }
