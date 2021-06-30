@@ -1,5 +1,5 @@
 import React from "react";
-import store, { noteDeleted } from "../redux/store";
+import store, { noteDeleted, noteArchived, archiveAdded } from "../redux/store";
 
 class NoteControls extends React.Component {
   constructor(props) {
@@ -11,7 +11,14 @@ class NoteControls extends React.Component {
   }
 
   handleArchive(e) {
-    console.log("Archive ", this.id);
+    const id = this.props.note.id;
+    const note = { ...this.props.note };
+    store.dispatch(
+      noteDeleted({
+        id,
+      })
+    );
+    store.dispatch(archiveAdded({ ...note }));
   }
 
   handleDelete(e) {

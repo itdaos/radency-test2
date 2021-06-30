@@ -16,8 +16,8 @@ function ArchiveNote(props) {
           return prev + " " + cur;
         }, "")}
       </div>
+
       <div className="col-2 controls">
-        <img src="img/edit.svg" alt="edit" />
         <img src="img/doc.svg" alt="archive" />
         <img src="img/delete.svg" alt="delete" />
       </div>
